@@ -1,8 +1,8 @@
 const mysql = require('mysql')
 const config = {
     database: 'flight_sys',
-    user: 'root',
-    password:'malf0916'
+    user: '你的数据库用户名',
+    password:'数据库用户密码'
 }
 
 
