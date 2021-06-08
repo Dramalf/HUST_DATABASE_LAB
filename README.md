@@ -6,14 +6,14 @@ mysql-react-tailwindcss-nodejs
 
 ## dblab
 客户预定前端界面
-cd dblab
-npm start //等待一会...
+`cd dblab`
+`npm start` //等待一会...
 ## server
 客户预定后台
-cd server
-node server.js
+`cd server`
+`node server.js`
 
 
-node create_air.js/create_loc.js/create_p.js 可以插入一些数据
+`node create_air.js/create_loc.js/create_p.js` 可以插入一些数据
 
 
