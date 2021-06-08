@@ -16,24 +16,23 @@ app.all('*', function (req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
   });
-  console.log(nanoid(10))
 
 app.get('/myorder', (req, res) => {
     let {c_id}=req.query
     console.log("查询用户订单", c_id)
-    let t1=db("select ticket_order.id as tid,seat_id as sid,fullname, flight_id,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person,ticket_order,location LA,location LB,airline_info,seat where ticket_order.payer_id=? and person.id=seat.p_id and seat.id=ticket_order.seat_id and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id and status=0", [c_id]).then(dbres => {
+    let t1=db("select ticket_order.id as tid,seat_id as sid,fullname, flight_id as f_no,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person,ticket_order,location LA,location LB,airline_info,seat where ticket_order.payer_id=? and person.id=seat.p_id and seat.id=ticket_order.seat_id and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id and status=0", [c_id]).then(dbres => {
         console.log("该用户未支付机票", dbres)
         return dbres
     }).catch(err => {
         console.log("/myorder查询1出错")
     })
-    let t2=db("select ticket_order.id as tid,seat_id as sid,fullname, flight_id,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person,ticket_order,location LA,location LB,airline_info,seat where ticket_order.payer_id=? and person.id=seat.p_id and seat.id=ticket_order.seat_id and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id and status=1", [c_id]).then(dbres => {
+    let t2=db("select ticket_order.id as tid,seat_id as sid,fullname, flight_id as f_no,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person,ticket_order,location LA,location LB,airline_info,seat where ticket_order.payer_id=? and person.id=seat.p_id and seat.id=ticket_order.seat_id and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id and status=1", [c_id]).then(dbres => {
         console.log("该用户已经支付机票", dbres)
         return dbres
     }).catch(err => {
         console.log("/myorder查询2出错")
     })
-    let t3=db("select seat.id as sid,fullname,flight_id,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no ,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person, airline_info,location LA,location LB,seat where person.id=seat.p_id and seat.p_id=? and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id", [c_id]).then(dbres => {
+    let t3=db("select seat.id as sid,fullname,flight_id as f_no,DATE_FORMAT(s_time,'%H:%i') as s_time,DATE_FORMAT(e_time,'%H:%i') as e_time,LA.location_name s_city ,LB.location_name e_city, seat_no ,price,DATE_FORMAT(s_time,'%Y-%m-%d %H:%i:%S') as stime,DATE_FORMAT(e_time,'%Y-%m-%d %H:%i:%S') as etime from person, airline_info,location LA,location LB,seat where person.id=seat.p_id and seat.p_id=? and airline_info.id=seat.a_id and s_loc_id=LA.id and e_loc_id=LB.id", [c_id]).then(dbres => {
         console.log("本人机票", dbres)
         return dbres
     }).catch(err => {
