@@ -11,7 +11,7 @@ CREATE TABLE location(
 id char(10),
 location_name CHAR(20) NOT NULL,
 constraint pk_location primary key(id)
-)
+)；
 --表3 航班表
 CREATE TABLE airline_info(
 id char(10),
@@ -25,7 +25,7 @@ price INT NOT NULL,
 constraint pk_airline_info primary key(id),
 constraint fk_airline_info_sid FOREIGN KEY (s_loc_id) references location(id),
 constraint fk_airline_info_eid FOREIGN KEY (e_loc_id) references location(id)
-)
+)；
 --表4 座位表
 CREATE TABLE SEAT(
 	id CHAR(10) ,
@@ -36,34 +36,24 @@ CREATE TABLE SEAT(
 	constraint fk_seat_pid FOREIGN KEY (p_id) references person(id)
 	constraint fk_seat_aid FOREIGN KEY (a_id) references airline_info(id)
 )
-insert into 
-insert into airline_info 
-set  id=1,
-      airline_company="东方航空",
-      s_date='2021-5-31',
-      s_time='05:00:00',
-      departure_id=1,
-      destination_id=2,
-      flightID="CA0001",
-      capacity=100,
-      time_required=100;
+--表5 订单表
+CREATE TABLE ticket_order(
+	id char(10) primary key,
+	seat_id char(10),
+	payer_id char(10),
+	constraint fk_order_sid foreign key (seat_id) references seat(id),
+	constraint fk_order_pid foreign key (payer_id) references person(id)
+);
 
-select 
-    airline_company,
-    DATE_FORMAT(s_date,'%Y-%m-%d') ,
-    s_time,
-    flightID,
-    a.location_name as departure_name,
-    b.location_name as destination_name,
-    capacity,
-    time_required
-    from location as a,location as b,airline_info
-    where a.id=airline_info.departure_id and b.id=airline_info.destination_id
-insert into airline_info
-set 
-
-
-
+--退订时的触发器设置
+delimiter $
+create trigger TS_T
+after delete  on ticket_order for each row
+    begin
+        delete  from seat where id=old.seat_id;
+    end;
+$
+delimiter ;
 
 
 
