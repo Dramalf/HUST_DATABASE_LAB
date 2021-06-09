@@ -7,10 +7,12 @@ mysql-react-tailwindcss-nodejs
 ## dblab
 客户预定前端界面
 `cd dblab`
+
 `npm start` //等待一会...
 ## server
 客户预定后台
 `cd server`
+
 `node server.js`
 
 
