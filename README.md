@@ -3,7 +3,8 @@
 mysql-react-tailwindcss-nodejs
 ### 该项目部分完成航班检索，客户预定，支付/退订订单功能
 ### 后台管理员部分见 https://gitee.com/mou-ziyao/ss_airline-front 
-
+## sql
+sql.txt包含了建表，触发器的sql语句
 ## dblab
 客户预定前端界面
 `cd dblab`
