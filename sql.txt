@@ -11,21 +11,21 @@ CREATE TABLE location(
 id char(10),
 location_name CHAR(20) NOT NULL,
 constraint pk_location primary key(id)
-)；
+);
 --表3 航班表
 CREATE TABLE airline_info(
 id char(10),
 flight_id char(10) NOT NULL,
 capacity INT NOT NULL,
-s_time DATETIME() NOT NULL,
-e_time DATETIME() NOT NULL,
+s_time DATETIME NOT NULL,
+e_time DATETIME NOT NULL,
 s_loc_id char(10) NOT NULL,
 e_loc_id char(10) NOT NULL ,
 price INT NOT NULL,
 constraint pk_airline_info primary key(id),
 constraint fk_airline_info_sid FOREIGN KEY (s_loc_id) references location(id),
 constraint fk_airline_info_eid FOREIGN KEY (e_loc_id) references location(id)
-)；
+);
 --表4 座位表
 CREATE TABLE SEAT(
 	id CHAR(10) ,
@@ -33,9 +33,9 @@ CREATE TABLE SEAT(
 	p_id char(10) NOT NULL,
 	seat_no char(3) NOT NULL,
 	constraint pk_seat primary key(id),
-	constraint fk_seat_pid FOREIGN KEY (p_id) references person(id)
+	constraint fk_seat_pid FOREIGN KEY (p_id) references person(id),
 	constraint fk_seat_aid FOREIGN KEY (a_id) references airline_info(id)
-)
+);
 --表5 订单表
 CREATE TABLE ticket_order(
 	id char(10) primary key,
